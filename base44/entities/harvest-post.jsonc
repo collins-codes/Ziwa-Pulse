@@ -1,0 +1,88 @@
+{
+  "name": "HarvestPost",
+  "type": "object",
+  "properties": {
+    "harvester_name": {
+      "type": "string",
+      "maxLength": 120,
+      "description": "Name shown on the public harvest listing"
+    },
+    "phone": {
+      "type": "string",
+      "pattern": "^\\+254[17][0-9]{8}$",
+      "description": "Private Kenyan phone number; released only to the successful claimer"
+    },
+    "beach": {
+      "type": "string",
+      "description": "Beach record ID where material is available"
+    },
+    "estimated_tonnes": {
+      "type": "number",
+      "minimum": 0.01,
+      "description": "Harvester's estimated available amount in tonnes"
+    },
+    "condition": {
+      "type": "string",
+      "enum": ["fresh", "dried"],
+      "description": "Condition of the material"
+    },
+    "available_from": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time the material becomes available"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["open", "claimed", "closed"],
+      "default": "open"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "claimed_by": {
+      "type": "string",
+      "description": "Base44 user ID of the successful claimer; private"
+    },
+    "is_sample": {
+      "type": "boolean",
+      "default": false,
+      "description": "Marks demonstration-only sample posts"
+    },
+    "sample_key": {
+      "type": "string",
+      "description": "Stable key used only for local sample seeding"
+    }
+  },
+  "required": [
+    "harvester_name",
+    "phone",
+    "beach",
+    "estimated_tonnes",
+    "condition",
+    "available_from",
+    "status"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

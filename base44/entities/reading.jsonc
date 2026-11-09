@@ -1,0 +1,51 @@
+{
+  "name": "Reading",
+  "type": "object",
+  "properties": {
+    "beach": {
+      "type": "string",
+      "description": "Beach record ID this reading belongs to"
+    },
+    "cover_level": {
+      "type": "string",
+      "enum": ["Low", "Medium", "High"],
+      "enumColors": ["green", "yellow", "red"],
+      "description": "Observed water hyacinth cover level"
+    },
+    "cover_pct": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Estimated percentage of the shoreline covered"
+    },
+    "recorded_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time this reading was recorded"
+    },
+    "source": {
+      "type": "string",
+      "enum": ["sample", "manual", "satellite"],
+      "description": "Origin of this reading"
+    }
+  },
+  "required": ["beach", "cover_level", "cover_pct", "recorded_at", "source"],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

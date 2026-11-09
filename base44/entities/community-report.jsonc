@@ -1,0 +1,48 @@
+{
+  "name": "CommunityReport",
+  "type": "object",
+  "properties": {
+    "beach": {
+      "type": "string",
+      "description": "Beach record ID this verified report is about"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Admin-approved public observation"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time the report was submitted"
+    },
+    "is_sample": {
+      "type": "boolean",
+      "default": false,
+      "description": "Marks demonstration-only sample reports"
+    },
+    "sample_key": {
+      "type": "string",
+      "description": "Stable key used only to seed local demonstration reports"
+    }
+  },
+  "required": ["beach", "description", "created_at"],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

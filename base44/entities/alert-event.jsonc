@@ -1,0 +1,48 @@
+{
+  "name": "AlertEvent",
+  "type": "object",
+  "properties": {
+    "beach": {
+      "type": "string",
+      "description": "ID of the beach whose cover level changed"
+    },
+    "old_level": {
+      "type": "string",
+      "enum": ["Low", "Medium", "High"],
+      "description": "Previous hyacinth cover level"
+    },
+    "new_level": {
+      "type": "string",
+      "enum": ["Low", "Medium", "High"],
+      "description": "Updated hyacinth cover level"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time this level change was recorded"
+    }
+  },
+  "required": ["beach", "old_level", "new_level", "created_at"],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

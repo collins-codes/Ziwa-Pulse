@@ -1,0 +1,66 @@
+{
+  "name": "Buyer",
+  "type": "object",
+  "properties": {
+    "group_name": {
+      "type": "string",
+      "maxLength": 120,
+      "description": "Name of the buying group"
+    },
+    "phone": {
+      "type": "string",
+      "pattern": "^\\+254[17][0-9]{8}$",
+      "description": "Private Kenyan contact number"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["briquettes", "biogas", "crafts"],
+      "description": "Material use or buyer group type"
+    },
+    "beaches": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "description": "Beach record IDs this buyer can collect from"
+    },
+    "max_tonnes": {
+      "type": "number",
+      "minimum": 0.01,
+      "description": "Maximum amount this buyer can collect in tonnes"
+    },
+    "is_sample": {
+      "type": "boolean",
+      "default": false,
+      "description": "Marks demonstration-only sample buyers"
+    },
+    "sample_key": {
+      "type": "string",
+      "description": "Stable key used only for local sample seeding"
+    }
+  },
+  "required": ["group_name", "phone", "type", "beaches", "max_tonnes"],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

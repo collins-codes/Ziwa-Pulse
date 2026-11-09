@@ -1,0 +1,71 @@
+{
+  "name": "Beach",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the beach or shoreline monitoring site"
+    },
+    "county": {
+      "type": "string",
+      "description": "Kenyan county where the beach is located"
+    },
+    "lat": {
+      "type": "number",
+      "description": "Latitude of the monitoring site"
+    },
+    "lng": {
+      "type": "number",
+      "description": "Longitude of the monitoring site"
+    },
+    "cover_level": {
+      "type": "string",
+      "enum": ["Low", "Medium", "High"],
+      "enumColors": ["green", "yellow", "red"],
+      "description": "Observed water hyacinth cover level"
+    },
+    "cover_pct": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Estimated percentage of the shoreline covered"
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time the cover estimate was last updated"
+    },
+    "is_sample": {
+      "type": "boolean",
+      "default": false,
+      "description": "Marks demonstration-only sample observations"
+    }
+  },
+  "required": [
+    "name",
+    "county",
+    "lat",
+    "lng",
+    "cover_level",
+    "cover_pct",
+    "last_updated"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

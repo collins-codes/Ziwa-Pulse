@@ -1,0 +1,38 @@
+{
+  "name": "Briefing",
+  "type": "object",
+  "properties": {
+    "text_en": {
+      "type": "string",
+      "description": "Bilingual daily lake briefing in English"
+    },
+    "text_sw": {
+      "type": "string",
+      "description": "Bilingual daily lake briefing in Kiswahili"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time this briefing run was completed"
+    }
+  },
+  "required": ["text_en", "text_sw", "created_at"],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

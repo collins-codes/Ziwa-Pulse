@@ -1,0 +1,80 @@
+{
+  "name": "SentMessage",
+  "type": "object",
+  "properties": {
+    "to": {
+      "type": "string",
+      "pattern": "^\\+254[17][0-9]{8}$",
+      "description": "Subscriber phone number in Kenyan E.164 format; admin-only"
+    },
+    "text": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Bilingual alert text prepared for SMS"
+    },
+    "beach": {
+      "type": "string",
+      "description": "Beach record ID associated with the alert"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["dry-run", "sent", "failed"],
+      "enumColors": ["gray", "green", "red"],
+      "description": "Delivery mode or outcome"
+    },
+    "time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time the message was prepared or sent"
+    },
+    "alert_event": {
+      "type": "string",
+      "description": "AlertEvent record ID that produced this message"
+    },
+    "subscriber": {
+      "type": "string",
+      "description": "Subscriber record ID used for retry-safe message recording"
+    },
+    "message_kind": {
+      "type": "string",
+      "enum": ["alert", "harvest"],
+      "description": "Kind of dry-run message"
+    },
+    "harvest_post": {
+      "type": "string",
+      "description": "HarvestPost record ID associated with a harvest message"
+    },
+    "buyer": {
+      "type": "string",
+      "description": "Buyer record ID associated with a harvest message"
+    },
+    "is_sample": {
+      "type": "boolean",
+      "default": false,
+      "description": "Marks demonstration-only dry-run messages"
+    }
+  },
+  "required": ["to", "text", "beach", "status", "time"],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

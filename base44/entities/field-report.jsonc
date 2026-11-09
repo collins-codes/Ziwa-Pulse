@@ -1,0 +1,83 @@
+{
+  "name": "FieldReport",
+  "type": "object",
+  "properties": {
+    "beach": {
+      "type": "string",
+      "description": "Beach record ID this report is about"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Community member's observation"
+    },
+    "reporter_name": {
+      "type": "string",
+      "maxLength": 120,
+      "description": "Optional reporter name; visible to admins only"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Optional private contact number; never included in public reports"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pending", "verified", "rejected"],
+      "enumColors": ["yellow", "green", "red"],
+      "description": "Admin review status"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time the report was submitted"
+    },
+    "is_sample": {
+      "type": "boolean",
+      "default": false,
+      "description": "Marks demonstration-only sample reports"
+    },
+    "sample_key": {
+      "type": "string",
+      "description": "Stable key used only to seed local demonstration reports"
+    }
+  },
+  "required": ["beach", "description", "status", "created_at"],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "$and": [
+            {
+              "data.status": "pending"
+            },
+            {
+              "data.is_sample": {
+                "$ne": true
+              }
+            }
+          ]
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
